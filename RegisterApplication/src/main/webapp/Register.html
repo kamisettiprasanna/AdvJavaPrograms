@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body bgcolor="pink">
+<h1>Register Form.....</h1>
+<form method="get" action="./RegisterServlet">
+<label>User Name:</label>
+<input type="text" name="UserName" required/>
+<br><br> 
+<label>User Password:</label>
+<input type="password" name="UserPassword" required/>
+<br><br> 
+<label>email:</label>
+<input type="email" name="email" required/>
+<br><br> 
+<label>Gender:</label>
+<input type="radio"  name="gender" value="male" required/>male
+<input type="radio" name="gender" value="female" required/>female
+<br><br> 
+<label>Qualification:</label>
+<input type="checkbox"  name="qualification" value="BSC" />BSC
+<input type="checkbox" name="qualification" value="MCA" />MCA
+<input type="checkbox" name="qualification" value="Btech"  />BTech
+<br><br> 
+<label>DOB:</label>
+<input type="date" name="DOB" required/>
+<br><br>
+<label>Country:</label>
+<select name="Country">
+<option>India</option>
+<option>America</option>
+<option>Africa</option>
+</select>  
+<br><br>
+<label>Languages:</label>
+<select name="Languages"size="3" multiple>
+<option>Telugu</option>
+<option>Hindi</option>
+<option>English</option>
+<option>Kanada</option>
+
+</select>
+<br><br>
+<label>Ratan Sir Comments</label>
+<textarea name="comments" rows="5" cols="23">
+</textarea>
+<br><br>                                                            
+<input type="submit" value="Register"/>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+package com.sathya.servlet;
+
+import java.io.InputStream;
+import java.sql.Date;
+import java.util.Base64;
+
+public class Product_data {
+   
+	public int proId;
+	public String proName;
+	public  double proPrice;
+	private  String proBrand;
+	private  String promadeIn;
+	public  Date promDate;
+	public  Date promeDate;
+	public  InputStream proImage;
+	private byte[] imagework;
+	public int getProId() {
+		return proId;
+	}
+	public void setProId(int proId) {
+		this.proId = proId;
+	}
+	public String getProName() {
+		return proName;
+	}
+	public void setProName(String proName) {
+		this.proName = proName;
+	}
+	public double getProPrice() {
+		return proPrice;
+	}
+	public void setProPrice(double proPrice) {
+		this.proPrice = proPrice;
+	}
+	public String getProBrand() {
+		return proBrand;
+	}
+	public void setProBrand(String proBrand) {
+		this.proBrand = proBrand;
+	}
+	public String getPromadeIn() {
+		return promadeIn;
+	}
+	public void setPromadeIn(String promadeIn) {
+		this.promadeIn = promadeIn;
+	}
+	public Date getPromDate() {
+		return promDate;
+	}
+	public void setPromDate(Date promDate) {
+		this.promDate = promDate;
+	}
+	public Date getPromeDate() {
+		return promeDate;
+	}
+	public void setPromeDate(Date promeDate) {
+		this.promeDate = promeDate;
+	}
+	public InputStream getProImage() {
+		return proImage;
+	}
+	public void setProImage(InputStream proImage) {
+		this.proImage = proImage;
+	}
+	public byte[] getImagework() {
+		return imagework;
+	}
+	public void setImagework(byte[] imagework) {
+		this.imagework = imagework;
+	}}
+	

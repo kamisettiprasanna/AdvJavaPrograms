@@ -1,0 +1,80 @@
+package com.sathya.servlet;
+
+	import java.sql.Connection;
+	import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+	public class ProductDao {
+		public int save(Product_data product) throws SQLException 
+		{
+			Connection connection=null;
+			PreparedStatement preparedStatement=null;
+			int saveResult=0;
+			try
+			{
+				connection=DBconnection.createConnection();	
+				preparedStatement=connection.prepareStatement("insert into product_data values(?,?,?,?,?,?,?,?)");
+				
+				preparedStatement.setInt(1, product.getProId());
+				preparedStatement.setString(2, product.getProName());
+				preparedStatement.setDouble(3, product.getProPrice());
+				preparedStatement.setString(4, product.getProBrand());
+				preparedStatement.setString(5, product.getPromadeIn());
+				preparedStatement.setDate(6, product.getPromDate());
+				preparedStatement.setDate(7, product.getPromeDate());
+				preparedStatement.setBinaryStream(8, product.getProImage());
+				saveResult = preparedStatement.executeUpdate();
+		    }
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				if(preparedStatement!=null)
+	                  preparedStatement.close();
+				if(connection!=null)
+	                 connection.close();			
+			}
+			return saveResult;
+	  	}
+	
+		 
+		 
+		public List<Product_data> findAll() {
+				
+				
+				List<Product_data> products=new ArrayList<Product_data>();
+				try(Connection connection=DBconnection.createConnection();
+						Statement statement=connection.createStatement()){
+					//execute the query
+					ResultSet resultset=statement.executeQuery("select * from product");
+					
+					while(resultset.next())
+					{
+						Product_data product=new Product_data();
+						
+						Product_data.setProId(resultset.getInt("proId"));
+						Product_data.setProName(resultset.getString("proName"));
+						Product_data.setProPrice(resultset.getDouble("proPrice"));
+						Product_data.setProBrand(resultset.getString("proBrand"));
+						Product_data.setPromadeIn(resultset.getString("promadeIn"));
+						Product_data.setPromDate(resultset.getDate("promDate"));
+						Product_data.setPromeDate(resultset.getDate("promeDate"));
+						product.setImagework(resultset.getBytes("proImage"));
+						
+				        products.add(product);
+					
+				}
+					
+			}
+				catch(SQLException e) {
+					e.printStackTrace();
+				}
+			return products;
+	 }
+	}

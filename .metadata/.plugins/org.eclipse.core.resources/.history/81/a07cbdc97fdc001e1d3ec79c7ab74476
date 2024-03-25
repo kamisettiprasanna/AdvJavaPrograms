@@ -1,0 +1,34 @@
+
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.sathya.servlet.ProductDao;
+import com.sathya.servlet.Product_data;
+
+
+@WebServlet("/EditProductServlet")
+public class EditProductServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+   	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	int proId=Integer.parseInt(request.getParameter("proId"));
+	ProductDao productdao=new ProductDao();
+	
+	Product_data existingproduct=productdao.findById(proId);
+	//sending the  product object to edit-form  by adding existing jsp file
+	request.setAttribute("existingproduct", existingproduct);
+
+	//to send the data to jsp file add the data into request object
+	
+	RequestDispatcher dispatcher=request.getRequestDispatcher("Editform.jsp");
+	dispatcher.forward(request, response);
+	
+   	}
+}

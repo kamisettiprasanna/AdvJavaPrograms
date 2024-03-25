@@ -1,0 +1,29 @@
+@charset "ISO-8859-1";
+.element{
+	color:"pink";
+	text-align:"center";
+	border:10px solid;
+	font-size:20px;
+	padding-top:67px;
+	
+}
+.list{
+	color:"yellow";
+	font-style:"Italic";
+	text-align:"center";
+	border:10px dotted;
+	font-size:20px;
+	padding-left:67px;
+	
+	
+}
+.table{
+	color:"blue";
+	font-style:"Italic";
+	text-align:"center";
+	border:10px dotted;
+	font-size:20px;
+	padding-left:67px;
+	
+	
+}

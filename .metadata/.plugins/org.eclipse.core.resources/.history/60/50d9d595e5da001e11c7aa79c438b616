@@ -1,0 +1,72 @@
+package com.sathya.servlet;
+
+import java.io.InputStream;
+import java.sql.Date;
+import java.util.Base64;
+
+public class Product_data {
+   
+	public static int proId;
+	public static String proName;
+	public static double proPrice;
+	private static String proBrand;
+	private static String promadeIn;
+	public static Date promDate;
+	public static Date promeDate;
+	public static InputStream proImage;
+	private byte[] imagework;
+	public String getImagework() {
+		//convertion of byte[] to string
+		return Base64.getEncoder().encodeToString(imagework);
+	
+	}
+	public void setImagework(byte[] imagework) {
+		this.imagework = imagework;
+	}
+	public static int getProId() {
+		return proId;
+	}
+	public static void setProId(int proId) {
+		Product_data.proId = proId;
+	}
+	public static String getProName() {
+		return proName;
+	}
+	public static void setProName(String proName) {
+		Product_data.proName = proName;
+	}
+	public static double getProPrice() {
+		return proPrice;
+	}
+	public static void setProPrice(double proPrice) {
+		Product_data.proPrice = proPrice;
+	}
+	public static String getProBrand() {
+		return proBrand;
+	}
+	public static void setProBrand(String proBrand) {
+		Product_data.proBrand = proBrand;
+	}
+	public static String getPromadeIn() {
+		return promadeIn;
+	}
+	public static void setPromadeIn(String promadeIn) {
+		Product_data.promadeIn = promadeIn;
+	}
+	public static Date getPromDate() {
+		return promDate;
+	}
+	public static void setPromDate(Date promDate) {
+		Product_data.promDate = promDate;
+	}
+	public static Date getPromeDate() {
+		return promeDate;
+	}
+	public static void setPromeDate(Date promeDate) {
+		Product_data.promeDate = promeDate;
+	}
+	public void setProImage(InputStream proImage2) {
+		// TODO Auto-generated method stub
+		
+	}
+}

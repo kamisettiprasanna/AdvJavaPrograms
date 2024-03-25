@@ -1,0 +1,95 @@
+
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.Base64;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.io.IOUtils;
+
+import com.sathya.servlet.ProductDao;
+import com.sathya.servlet.Product_data;
+
+
+@WebServlet("/UpdateProductServlet")
+public class UpdateProductServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+	 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	int proId=Integer.parseInt(request.getParameter("proId"));
+	String UpdateproName=request.getParameter("proName");
+	double UpdateproPrice=Double.parseDouble(request.getParameter("proPrice"));
+	
+	String UpdateproBrand=request.getParameter("proBrand");
+	String UpdatepromadeIn=request.getParameter("promadeIn");
+	Date UpdatepromDate=Date.valueOf(request.getParameter("promDate"));
+	Date UpdateproeDate=Date.valueOf(request.getParameter("promeDate"));
+	//Using above details create the product Object...
+			Product_data product = new Product_data();
+			product.setProId(proId);
+			product.setProName(UpdateproName);
+			product.setProPrice(UpdateproPrice);
+			product.setProBrand(UpdateproBrand);
+			product.setPromadeIn(UpdatepromadeIn);
+			product.setPromDate(UpdatepromDate);
+			product.setPromeDate(UpdateproeDate);
+			
+			Part filePart=request.getPart("newproImage");   //newProImage is the name of your input field
+			if(filePart!=null && filePart.getSize()>0) {
+				InputStream inputStream=filePart.getInputStream();
+				//convertion of inputstream to byte[]
+				byte[] newproImage=IOUtils.toByteArray(inputStream);
+				product.setProImage(newproImage);
+				
+			}
+			else
+			{
+				String s=request.getParameter("existingImage");
+				byte[] existingImage=Base64.getDecoder().decode(s);
+				product.setProImage(existingImage);
+				
+			}
+			ProductDao productdao = new ProductDao();
+			
+			int result = 0;
+			
+				
+					
+						result = productdao.updateById(product);
+					     
+						if(result==1) {
+							//to send the data to jsp file add the data into request object
+							;
+							RequestDispatcher dispatcher=request.getRequestDispatcher("edit_product.jsp");
+							dispatcher.forward(request, response);
+						}
+						else
+						{
+
+							response.setContentType("text/html");
+							PrintWriter writer =response.getWriter();
+							writer.println("Data insertion not successful"+result);
+						RequestDispatcher dispatcher=request.getRequestDispatcher("app-product.html");
+						dispatcher.include(request, response);
+									
+						}
+						
+						
+						
+						
+	}}
+				
+			
+			
+			

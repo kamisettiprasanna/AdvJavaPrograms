@@ -1,0 +1,64 @@
+
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.io.IOUtils;
+
+import com.sathya.servlet.Product_data;
+
+
+@WebServlet("/UpdateProductServlet")
+public class UpdateProductServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+	 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	int proId=Integer.parseInt(request.getParameter("proId"));
+	String UpdateproName=request.getParameter("proName");
+	double UpdateproPrice=Double.parseDouble(request.getParameter("proPrice"));
+	
+	String UpdateproBrand=request.getParameter("proBrand");
+	String UpdatepromadeIn=request.getParameter("promadeIn");
+	Date UpdatepromDate=Date.valueOf(request.getParameter("promDate"));
+	Date UpdateproeDate=Date.valueOf(request.getParameter("promeDate"));
+	//Using above details create the product Object...
+			Product_data product = new Product_data();
+			product.setProId(proId);
+			product.setProName(UpdateproName);
+			product.setProPrice(UpdateproPrice);
+			product.setProBrand(UpdateproBrand);
+			product.setPromadeIn(UpdatepromadeIn);
+			product.setPromDate(UpdatepromDate);
+			product.setPromeDate(UpdateproeDate);
+			
+			Part filePart=request.getPart("newproImage");   //newProImage is the name of your input field
+			if(filePart!=null && filePart.getSize()>0) {
+				InputStream inputStream=filePart.getInputStream();
+				//convertion of inputstream to byte[]
+				byte[] newproImage=IOUtils.toByteArray(inputStream);
+				product.setProImage(newproImage);
+				
+			}
+			else
+			{
+				Part file=request.getPart("existingImage");
+				InputStream inputStream=file.getInputStream();
+				//convertion of inputstream to byte[]
+				byte[] newproImage=IOUtils.toByteArray(inputStream);
+				product.setProImage(existingImage);
+				
+			}
+				
+			}
+			
+			
